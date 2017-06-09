@@ -11,11 +11,11 @@
     <Authors>`柳暗灬花溟</Authors>
     <Owiners>`柳暗灬花溟</Owiners>
     <PackageReleaseNotes>Update dependencies</PackageReleaseNotes>
-    <PackageIconUrl>git</PackageIconUrl>
-    <PackageProjectUrl>git</PackageProjectUrl>
-    <PackageLicenseUrl>git</PackageLicenseUrl>
+    <PackageIconUrl>https://avatars2.githubusercontent.com/u/18181642?s=40</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/MaLuxray/Applibs</PackageProjectUrl>
+    <!---<PackageLicenseUrl>git</PackageLicenseUrl>-->
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/MaLuxray/Applibs</RepositoryUrl>
     
     <TargetFrameworks>net45;net451;net452;netstandard1.3</TargetFrameworks>
   </PropertyGroup>
