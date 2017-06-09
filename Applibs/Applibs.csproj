@@ -6,7 +6,7 @@
     <VersionPrefix>1.0.0</VersionPrefix>
     <PackageTags>Applibs</PackageTags>
     <Title>Applibs</Title>
-    <Description>A simple framework for net45，net451，net452 and .netstandard1.3</Description>
+    <Description>A simple framework for net45，net451，net452 and netstandard1.3</Description>
     <AssembllyName>Applibs</AssembllyName>
     <Authors>`柳暗灬花溟</Authors>
     <Owiners>`柳暗灬花溟</Owiners>
