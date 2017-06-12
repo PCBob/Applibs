@@ -30,7 +30,7 @@ namespace Applibs.Mapping
 #if NetCore
                 var src = t.GetTypeInfo();
                 var classMapType = t.GetTypeInfo().Assembly.DefinedTypes
-                    .Single(_ => string.Equals(en, _.Name, StringComparison.CurrentCultureIgnoreCase)
+                    .SingleOrDefault(_ => string.Equals(en, _.Name, StringComparison.CurrentCultureIgnoreCase)
                         && 
                         (
                             src.BaseType != null 
@@ -41,10 +41,10 @@ namespace Applibs.Mapping
                             || src.BaseType.GetGenericTypeDefinition() == typeof(ClassMap<,>)
                             )
                         )
-                        ).AsType();
+                        );
 #else
                 var classMapType =
-                    t.Assembly.DefinedTypes.Single(
+                    t.Assembly.DefinedTypes.SingleOrDefault(
                         _ => string.Equals(en, _.Name, StringComparison.CurrentCultureIgnoreCase)
                         &&
                         (
@@ -56,7 +56,7 @@ namespace Applibs.Mapping
                             || t.BaseType.GetGenericTypeDefinition() == typeof(ClassMap<,>)
                             )
                         )
-                        ).AsType();
+                        );
 #endif
                 if (classMapType == null)
                 {
@@ -64,7 +64,13 @@ namespace Applibs.Mapping
                 }
                 else
                 {
-                    value = (IClassMap)Activator.CreateInstance(classMapType);
+                    value = (IClassMap)Activator.CreateInstance(
+#if NetCore
+                        classMapType.AsType()
+#else
+                        classMapType
+#endif
+                        );
                 }
                 Cached.TryAdd(t, value);
             }

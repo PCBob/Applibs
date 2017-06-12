@@ -17,6 +17,9 @@ namespace Applibs
             {
                 switch (@base.NodeType)
                 {
+                    case ExpressionType.Lambda:
+                        @base = ((LambdaExpression)@base).Body;
+                        break;
                     case ExpressionType.Parameter:
                         return ((ParameterExpression)@base).Type.Name;
                     case ExpressionType.Convert:

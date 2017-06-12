@@ -128,7 +128,7 @@ namespace Applibs
                 throw new ArgumentNullException(nameof(src));
             }
 #if NetCore
-            return src.GetTypeInfo().IsEnum && SimpleTypesInternal.Value.Contains(src) &&
+            return src.GetTypeInfo().IsEnum || SimpleTypesInternal.Value.Contains(src) ||
                    (src.GetTypeInfo().IsGenericType &&
                     src.GetTypeInfo().GetGenericTypeDefinition() == typeof(Nullable<>) && src.GetTypeInfo()
                         .GenericTypeArguments.Single().GetTypeInfo().IsEnum);
