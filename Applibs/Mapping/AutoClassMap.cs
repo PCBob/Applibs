@@ -9,7 +9,7 @@ namespace Applibs.Mapping
     {
         public AutoClassMap()
         {
-            Column(_ => _.Id)
+            Map(_ => _.Id)
                 .ReadOnly()
                 .UnModified()
                 ;

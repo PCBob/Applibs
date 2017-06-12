@@ -28,17 +28,16 @@ namespace Applibs.Mapping
             {
                 var en = $"{t.Name}ClassMap";
 #if NetCore
-                var src = t.GetTypeInfo();
                 var classMapType = t.GetTypeInfo().Assembly.DefinedTypes
                     .SingleOrDefault(_ => string.Equals(en, _.Name, StringComparison.CurrentCultureIgnoreCase)
-                        && 
+                        &&
                         (
-                            src.BaseType != null 
-                            && src.BaseType.GetTypeInfo().IsGenericType
-                            && 
+                            _.BaseType != null
+                            && _.BaseType.GetTypeInfo().IsGenericType
+                            &&
                             (
-                            src.BaseType.GetGenericTypeDefinition() == typeof  (AutoClassMap<,>) 
-                            || src.BaseType.GetGenericTypeDefinition() == typeof(ClassMap<,>)
+                                _.BaseType.GetGenericTypeDefinition() == typeof(AutoClassMap<,>)
+                            || _.BaseType.GetGenericTypeDefinition() == typeof(ClassMap<,>)
                             )
                         )
                         );
@@ -48,12 +47,12 @@ namespace Applibs.Mapping
                         _ => string.Equals(en, _.Name, StringComparison.CurrentCultureIgnoreCase)
                         &&
                         (
-                            t.BaseType != null
-                            && t.BaseType.IsGenericType
+                            _.BaseType != null
+                            && _.BaseType.IsGenericType
                             &&
                             (
-                            t.BaseType.GetGenericTypeDefinition() == typeof(AutoClassMap<,>)
-                            || t.BaseType.GetGenericTypeDefinition() == typeof(ClassMap<,>)
+                                _.BaseType.GetGenericTypeDefinition() == typeof(AutoClassMap<,>)
+                            || _.BaseType.GetGenericTypeDefinition() == typeof(ClassMap<,>)
                             )
                         )
                         );

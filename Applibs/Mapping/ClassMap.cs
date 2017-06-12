@@ -35,6 +35,6 @@ namespace Applibs.Mapping
             return this;
         }
 
-        protected PropertyMap Column(Expression<Func<TEntity, object>> column) => _properties.Get(column.GetMemberName());
+        protected PropertyMap Map(Expression<Func<TEntity, object>> column) => _properties.Get(column.GetMemberName());
     }
 }
