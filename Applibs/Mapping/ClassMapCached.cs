@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace Applibs.Mapping
 {
-    internal class ClassMapCached
+    internal static class ClassMapCached
     {
         private static readonly ConcurrentDictionary<Type, IClassMap> Cached = null;
 
