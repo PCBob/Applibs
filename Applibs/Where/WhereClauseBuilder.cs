@@ -315,9 +315,12 @@ namespace Applibs.Where
 
         private IWhereClauseBuilder<TKey, TEntity> Render(SqlOperator @operator, Action write, Expression<Func<TEntity, object>> member, object value, object other)
         {
+            string GetParameterName()=> $"{this._dialectSettings.ParameterPrefix}{AppUtility.GetUniqueStringValue(10)}";
+            void InsertParameter(string key,object obj)=> this._parameters.Insert(key, obj);
+
             write?.Invoke(); // ???
-            Func<string> getParameterName = () => $"{this._dialectSettings.ParameterPrefix}{AppUtility.GetUniqueStringValue(10)}";
-            Action<string, object> insertParameter = (arg1, arg2) => this._parameters.Insert(arg1, arg2);
+            //Func<string> getParameterName = () => $"{this._dialectSettings.ParameterPrefix}{AppUtility.GetUniqueStringValue(10)}";
+            //Action<string, object> insertParameter = (arg1, arg2) => this._parameters.Insert(arg1, arg2);
 
             string pn = null;
             object pv = null;
@@ -337,9 +340,9 @@ namespace Applibs.Where
                         throw new InvalidOperationException();
                     }
 
-                    pn = getParameterName();
+                    pn = GetParameterName();
                     pv = value;
-                    insertParameter(pn, pv);
+                    InsertParameter(pn, pv);
                     this._builder.Append($"{mn} LIKE {pn}");
 
                     break;
@@ -353,9 +356,9 @@ namespace Applibs.Where
                         throw new InvalidOperationException();
                     }
 
-                    pn = getParameterName();
+                    pn = GetParameterName();
                     pv = value;
-                    insertParameter(pn, pv);
+                    InsertParameter(pn, pv);
                     this._builder.Append($"{mn} {this.NotStatement} LIKE {pn}");
 
                     break;
@@ -381,12 +384,12 @@ namespace Applibs.Where
                         throw new InvalidOperationException();
                     }
 
-                    pn = getParameterName();
+                    pn = GetParameterName();
                     pv = value;
-                    spn = getParameterName();
+                    spn = GetParameterName();
                     spv = other;
-                    insertParameter(pn, pv);
-                    insertParameter(spn, spv);
+                    InsertParameter(pn, pv);
+                    InsertParameter(spn, spv);
                     this._builder.Append($"{mn} BETWEEN {pn} {this.AndStatement} {spn}");
 
                     break;
@@ -412,12 +415,12 @@ namespace Applibs.Where
                         throw new InvalidOperationException();
                     }
 
-                    pn = getParameterName();
+                    pn = GetParameterName();
                     pv = value;
-                    spn = getParameterName();
+                    spn = GetParameterName();
                     spv = other;
-                    insertParameter(pn, pv);
-                    insertParameter(spn, spv);
+                    InsertParameter(pn, pv);
+                    InsertParameter(spn, spv);
                     this._builder.Append($"{mn} {this.NotStatement} BETWEEN {pn} {this.AndStatement} {spn}");
 
                     break;
@@ -455,9 +458,9 @@ namespace Applibs.Where
                         throw new InvalidOperationException();
                     }
 
-                    pn = getParameterName();
+                    pn = GetParameterName();
                     pv = value;
-                    insertParameter(pn, pv);
+                    InsertParameter(pn, pv);
                     this._builder.Append($"{mn} IN {pn}");
 
                     break;
@@ -495,9 +498,9 @@ namespace Applibs.Where
                         throw new InvalidOperationException();
                     }
 
-                    pn = getParameterName();
+                    pn = GetParameterName();
                     pv = value;
-                    insertParameter(pn, pv);
+                    InsertParameter(pn, pv);
                     this._builder.Append($"{mn} {this.NotStatement} IN {pn}");
 
                     break;
@@ -521,9 +524,9 @@ namespace Applibs.Where
                         throw new InvalidOperationException();
                     }
 
-                    pn = getParameterName();
+                    pn = GetParameterName();
                     pv = value;
-                    insertParameter(pn, pv);
+                    InsertParameter(pn, pv);
                     this._builder.Append($"{mn} {this.EqualOperator} {pn}");
 
                     break;
@@ -539,9 +542,9 @@ namespace Applibs.Where
                         throw new InvalidOperationException();
                     }
 
-                    pn = getParameterName();
+                    pn = GetParameterName();
                     pv = value;
-                    insertParameter(pn, pv);
+                    InsertParameter(pn, pv);
                     this._builder.Append($"{mn} {this.NotEqualOperator} {pn}");
 
                     break;
@@ -554,9 +557,9 @@ namespace Applibs.Where
                     {
                         throw new InvalidOperationException();
                     }
-                    pn = getParameterName();
+                    pn = GetParameterName();
                     pv = value;
-                    insertParameter(pn, pv);
+                    InsertParameter(pn, pv);
                     this._builder.Append($"{mn} {this.GreaterThanOperator} {pn}");
 
                     break;
@@ -569,9 +572,9 @@ namespace Applibs.Where
                     {
                         throw new InvalidOperationException();
                     }
-                    pn = getParameterName();
+                    pn = GetParameterName();
                     pv = value;
-                    insertParameter(pn, pv);
+                    InsertParameter(pn, pv);
                     this._builder.Append($"{mn} {this.GreaterThanOrEqualOperator} {pn}");
 
                     break;
@@ -584,9 +587,9 @@ namespace Applibs.Where
                     {
                         throw new InvalidOperationException();
                     }
-                    pn = getParameterName();
+                    pn = GetParameterName();
                     pv = value;
-                    insertParameter(pn, pv);
+                    InsertParameter(pn, pv);
                     this._builder.Append($"{mn} {this.LessThanOperator} {pn}");
 
                     break;
@@ -599,9 +602,9 @@ namespace Applibs.Where
                     {
                         throw new InvalidOperationException();
                     }
-                    pn = getParameterName();
+                    pn = GetParameterName();
                     pv = value;
-                    insertParameter(pn, pv);
+                    InsertParameter(pn, pv);
                     this._builder.Append($"{mn} {this.LessThanOrEqualOperator} {pn}");
 
                     break;
