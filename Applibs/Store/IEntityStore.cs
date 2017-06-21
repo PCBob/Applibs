@@ -10,7 +10,7 @@ using Applibs.Where;
 
 namespace Applibs.Store
 {
-    public interface IEntityStore<TKey, TEntity> : ISelectEntityStorein<TKey, TEntity>
+    public interface IEntityStore<TKey, TEntity> : ISelectEntityStore<TKey, TEntity>
         where TKey : IEquatable<TKey>
         where TEntity : class, IEntity<TKey>
     {
