@@ -15,7 +15,7 @@ using Applibs.Store;
 
 namespace Applibs.Where
 {
-    public class WhereClauseBuilder<TKey, TEntity> : IWhereClauseBuilder<TKey, TEntity>
+    internal class WhereClauseBuilder<TKey, TEntity> : IWhereClauseBuilder<TKey, TEntity>
         where TKey : IEquatable<TKey>
         where TEntity : class, IEntity<TKey>
     {

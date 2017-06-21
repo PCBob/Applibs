@@ -10,7 +10,7 @@ using Applibs.Store;
 
 namespace Applibs.Sorting
 {
-    public sealed class SortClauseBuilder<TKey, TEntity> : ISortClauseBuilder<TKey, TEntity>
+    internal sealed class SortClauseBuilder<TKey, TEntity> : ISortClauseBuilder<TKey, TEntity>
         where TKey : IEquatable<TKey>
         where TEntity : class, IEntity<TKey>
     {
