@@ -38,7 +38,8 @@ namespace Applibs.Where
             _writeAnd = () => this.And();
             _writeOr = () => this.Or();
 
-            this._classMap = ClassMapCached.Fetch<TKey, TEntity>();
+            //  this._classMap = ClassMapCached.Fetch<TKey, TEntity>();
+            this._classMap = ClassMapCached<TKey, TEntity>.ClassMap;
         }
 
         public IWhereClause Object => this._obj;
@@ -315,8 +316,8 @@ namespace Applibs.Where
 
         private IWhereClauseBuilder<TKey, TEntity> Render(SqlOperator @operator, Action write, Expression<Func<TEntity, object>> member, object value, object other)
         {
-            string GetParameterName()=> $"{this._dialectSettings.ParameterPrefix}{AppUtility.GetUniqueStringValue(10)}";
-            void InsertParameter(string key,object obj)=> this._parameters.Insert(key, obj);
+            string GetParameterName() => $"{this._dialectSettings.ParameterPrefix}{AppUtility.GetUniqueStringValue(10)}";
+            void InsertParameter(string key, object obj) => this._parameters.Insert(key, obj);
 
             write?.Invoke(); // ???
             //Func<string> getParameterName = () => $"{this._dialectSettings.ParameterPrefix}{AppUtility.GetUniqueStringValue(10)}";

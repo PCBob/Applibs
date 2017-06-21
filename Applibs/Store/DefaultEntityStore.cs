@@ -28,7 +28,8 @@ namespace Applibs.Store
         {
             _storeMapping = storeMapping ?? throw new ArgumentNullException(nameof(storeMapping));
             _dialectSettings = dialectSettings ?? throw new ArgumentNullException(nameof(dialectSettings));
-            _classMap = ClassMapCached.Fetch<TKey, TEntity>();
+            //_classMap = ClassMapCached.Fetch<TKey, TEntity>();
+            this._classMap = ClassMapCached<TKey, TEntity>.ClassMap;
         }
 
         protected IStoreMapping StoreMapping => this._storeMapping;

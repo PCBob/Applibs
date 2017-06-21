@@ -26,7 +26,8 @@ namespace Applibs.Sorting
             _storeMapping = storeMapping ?? throw new ArgumentNullException(nameof(storeMapping));
             _dialectSettings = dialectSettings ?? throw new ArgumentNullException(nameof(dialectSettings));
             _body = new Dictionary<string, Orderby>();
-            _classMap = ClassMapCached.Fetch<TKey, TEntity>();
+            //_classMap = ClassMapCached.Fetch<TKey, TEntity>();
+            this._classMap = ClassMapCached<TKey, TEntity>.ClassMap;
         }
 
         public ISortClause Object => _obj;
