@@ -16,7 +16,7 @@ namespace Applibs.Mapping
         IPropertyMap Get(string name);
     }
 
-    internal sealed class PropertyMapCollection : IPropertyMapCollection
+    internal class PropertyMapCollection : IPropertyMapCollection
     {
         private readonly IDictionary<string, IPropertyMap> _body;
 
