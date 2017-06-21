@@ -16,5 +16,13 @@ namespace Applibs.Mapping
         bool CanModified { get; }
 
         PropertyInfo Property { get; }
+
+        IPropertyMap Column(string columnName);
+
+        IPropertyMap Ignord();
+
+        IPropertyMap ReadOnly();
+
+        IPropertyMap UnModified();
     }
 }

@@ -7,18 +7,18 @@ using System.Reflection;
 
 namespace Applibs.Mapping
 {
-    public interface IPropertyMapCollection : IEnumerable<KeyValuePair<string, PropertyMap>>
+    public interface IPropertyMapCollection : IEnumerable<KeyValuePair<string, IPropertyMap>>
     {
         IEnumerable<string> Names { get; }
 
-        IEnumerable<PropertyMap> PropertyMaps { get; }
+        IEnumerable<IPropertyMap> PropertyMaps { get; }
 
-        PropertyMap Get(string name);
+        IPropertyMap Get(string name);
     }
 
     internal sealed class PropertyMapCollection : IPropertyMapCollection
     {
-        private readonly IDictionary<string, PropertyMap> _body;
+        private readonly IDictionary<string, IPropertyMap> _body;
 
         internal PropertyMapCollection(Type t)
         {
@@ -28,21 +28,21 @@ namespace Applibs.Mapping
             }
             var propertyinfos = t.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 .Where(p => p.CanRead && p.CanWrite && p.PropertyType.IsSimpleType()).ToList();
-            _body = new Dictionary<string, PropertyMap>(propertyinfos.Count, StringComparer.CurrentCultureIgnoreCase);
+            _body = new Dictionary<string, IPropertyMap>(propertyinfos.Count, StringComparer.CurrentCultureIgnoreCase);
             propertyinfos.ForEach(p => _body.Add(p.Name, new PropertyMap(p)));
         }
 
         public IEnumerable<string> Names => _body.Keys;
 
-        public IEnumerable<PropertyMap> PropertyMaps => _body.Values;
+        public IEnumerable<IPropertyMap> PropertyMaps => _body.Values;
 
-        public PropertyMap Get(string name)
+        public IPropertyMap Get(string name)
         {
-            _body.TryGetValue(name, out PropertyMap value);
+            _body.TryGetValue(name, out IPropertyMap value);
             return value;
         }
 
-        public IEnumerator<KeyValuePair<string, PropertyMap>> GetEnumerator() => _body.GetEnumerator();
+        public IEnumerator<KeyValuePair<string, IPropertyMap>> GetEnumerator() => _body.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => _body.GetEnumerator();
     }

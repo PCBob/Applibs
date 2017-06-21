@@ -3,7 +3,7 @@
   <PropertyGroup>
 
     <PackageId>Daisuki_</PackageId>
-    <VersionPrefix>6.0.0</VersionPrefix>
+    <VersionPrefix>6.0.1</VersionPrefix>
     <PackageTags>Applibs</PackageTags>
     <Title>Applibs</Title>
     <Description>A simple framework for net45，net451，net452 and netstandard1.3</Description>

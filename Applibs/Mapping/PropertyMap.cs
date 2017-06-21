@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Applibs.Mapping
 {
-    public sealed class PropertyMap : IPropertyMap
+    internal class PropertyMap : IPropertyMap
     {
         private readonly PropertyInfo _property = null;
 
@@ -30,25 +30,25 @@ namespace Applibs.Mapping
 
         public PropertyInfo Property => _property;
 
-        public PropertyMap Column(string columnName)
+        public IPropertyMap Column(string columnName)
         {
             ColumnName = columnName ?? throw new ArgumentNullException(nameof(columnName));
             return this;
         }
 
-        public PropertyMap Ignord()
+        public IPropertyMap Ignord()
         {
             Ignored = true;
             return this;
         }
 
-        public PropertyMap ReadOnly()
+        public IPropertyMap ReadOnly()
         {
             IsReadOnly = true;
             return this;
         }
 
-        public PropertyMap UnModified()
+        public IPropertyMap UnModified()
         {
             CanModified = false;
             return this;
