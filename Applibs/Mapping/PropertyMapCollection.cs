@@ -1,12 +1,13 @@
 ﻿
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
 namespace Applibs.Mapping
 {
-    public interface IPropertyMapCollection
+    public interface IPropertyMapCollection : IEnumerable<KeyValuePair<string, PropertyMap>>
     {
         IEnumerable<string> Names { get; }
 
@@ -40,5 +41,9 @@ namespace Applibs.Mapping
             _body.TryGetValue(name, out PropertyMap value);
             return value;
         }
+
+        public IEnumerator<KeyValuePair<string, PropertyMap>> GetEnumerator() => _body.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => _body.GetEnumerator();
     }
 }
